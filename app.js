@@ -13,8 +13,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Cấu hình View Engine Handlebars
+const hbs = require('hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+// Helper định dạng tiền tệ đẹp (VNĐ)
+hbs.registerHelper('formatCurrency', function (value) {
+    if (value === undefined || value === null || isNaN(value)) return '0 VNĐ';
+    return Number(value).toLocaleString('vi-VN') + ' VNĐ';
+});
 
 // Cấu hình Stateless Session lưu trên MongoDB Atlas
 app.use(session({

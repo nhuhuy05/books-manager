@@ -243,11 +243,12 @@
             border-collapse: collapse;
             text-align: left;
             font-size: 0.925rem;
+            min-width: 520px;
         }
 
         th {
             background: rgba(15, 23, 42, 0.85);
-            padding: 1rem 1.25rem;
+            padding: 1rem 1.15rem;
             font-weight: 700;
             color: #cbd5e1;
             font-size: 0.8rem;
@@ -257,9 +258,25 @@
         }
 
         td {
-            padding: 1rem 1.25rem;
+            padding: 1rem 1.15rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             color: #e2e8f0;
+            vertical-align: middle;
+        }
+
+        th:nth-child(1), td:nth-child(1) {
+            white-space: nowrap;
+            width: 140px;
+        }
+
+        th:nth-child(2), td:nth-child(2) {
+            min-width: 160px;
+        }
+
+        th:nth-child(3), td:nth-child(3),
+        th:nth-child(4), td:nth-child(4) {
+            white-space: nowrap;
+            text-align: right;
         }
 
         tr:last-child td {
@@ -271,23 +288,33 @@
         }
 
         .code-pill {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
             font-family: 'Courier New', Courier, monospace;
             font-weight: 700;
             background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(16, 185, 129, 0.35);
             color: #34d399;
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
         }
 
         .price-base {
             color: #94a3b8;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
         }
 
         .price-vat {
             font-weight: 700;
             color: #38bdf8;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
         }
 
         .empty-state {
@@ -454,8 +481,8 @@
                                     <tr>
                                         <td><span class="code-pill">{{this.maSach}}</span></td>
                                         <td><strong>{{this.tenSach}}</strong></td>
-                                        <td class="price-base">{{this.giaGoc}} VNĐ</td>
-                                        <td class="price-vat">{{this.giaSauThue}} VNĐ</td>
+                                        <td class="price-base">{{formatCurrency this.giaGoc}}</td>
+                                        <td class="price-vat">{{formatCurrency this.giaSauThue}}</td>
                                     </tr>
                                 {{/each}}
                             {{else}}
